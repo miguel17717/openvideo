@@ -1,0 +1,18 @@
+{
+  "projectsDirectory": "",
+  "openMontagePath": "",
+  "remotionPath": "",
+  "ffmpegPath": "ffmpeg",
+  "ffprobePath": "ffprobe",
+  "pythonPath": "python",
+  "codexPath": "codex",
+  "preferredPort": 3000,
+  "autoFallback": true,
+  "render": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "workers": 2
+  },
+  "freeOnly": true
+}

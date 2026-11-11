@@ -1,0 +1,13 @@
+{
+  "brand": "OpenVideo",
+  "scenes": [
+    {"type":"card","duration":3,"title":"Hook rõ trong 3 giây","body":"Đây là template để kiểm tra hệ thống."},
+    {"type":"card","duration":3,"title":"Thay bằng ảnh của bạn","body":"Đặt file trong public/ và đổi type thành image, src thành tên file."},
+    {"type":"card","duration":3,"title":"Thêm footage phù hợp","body":"Đổi type thành video và chọn file MP4 có quyền sử dụng."},
+    {"type":"card","duration":3,"title":"Mỗi cảnh một ý","body":"Chữ tiếng Việt dựng bằng Be Vietnam Pro."},
+    {"type":"card","duration":3,"title":"Nguồn cần rõ ràng","body":"Ghi nguồn, tác giả và license vào artifacts/."},
+    {"type":"card","duration":3,"title":"Motion vừa đủ","body":"Ảnh có zoom nhẹ; chữ có hiệu ứng xuất hiện."},
+    {"type":"card","duration":3,"title":"Render và kiểm tra","body":"Kiểm tra thời lượng, resolution và khả năng giải mã."},
+    {"type":"end","duration":3,"title":"Sẵn sàng tạo video mới","body":"Thay content và asset để bắt đầu."}
+  ]
+}

@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();const slug=process.argv[2];
+if(!slug||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))throw new Error('Use a project slug, for example: video-dau-tien');
+const target=path.join(root,'projects',slug);
+if(fs.existsSync(target))throw new Error('Project already exists; existing files were preserved.');
+for(const dir of ['artifacts','public','renders','assets/images','assets/video'])fs.mkdirSync(path.join(target,dir),{recursive:true});
+fs.copyFileSync(path.join(root,'templates/vertical-eight/scenes.json'),path.join(target,'artifacts/scenes.json'));
+fs.copyFileSync(path.join(root,'templates/vertical-eight/index.tsx'),path.join(target,'index.tsx'));
+fs.writeFileSync(path.join(target,'project.json'),JSON.stringify({version:'1.0',project_id:slug,title:slug,pipeline_type:'animated-explainer',created_at:new Date().toISOString()},null,2));
+console.log('Created:',target);

@@ -1,0 +1,97 @@
+export type StepId = 'input' | 'script' | 'scenes' | 'footage' | 'subtitle' | 'motion' | 'openmontage' | 'remotion' | 'ffmpeg' | 'qa' | 'final';
+export type StepStatus = 'pending' | 'running' | 'completed' | 'failed' | 'skipped' | 'cancelled';
+
+export interface StudioConfig {
+  projectsDirectory: string;
+  openMontagePath: string;
+  remotionPath: string;
+  ffmpegPath: string;
+  ffprobePath: string;
+  pythonPath: string;
+  codexPath: string;
+  preferredPort: number;
+  autoFallback: boolean;
+  render: { width: number; height: number; fps: number; workers: number };
+  freeOnly: boolean;
+}
+
+export interface PipelineStep {
+  id: StepId;
+  name: string;
+  status: StepStatus;
+  detail?: string;
+  actionable: boolean;
+}
+
+export interface FileItem {
+  name: string;
+  relativePath: string;
+  type: 'file' | 'directory';
+  size: number;
+  modifiedAt: string;
+  category: string;
+}
+
+export interface VideoSummary {
+  relativePath: string;
+  name: string;
+  size: number;
+  modifiedAt: string;
+}
+
+export interface ProjectSummary {
+  id: string;
+  name: string;
+  path: string;
+  pipelineType?: string;
+  status: StepStatus | 'ready';
+  currentStep: StepId;
+  progress: number;
+  modifiedAt: string;
+  output?: VideoSummary;
+  error?: string;
+  steps: PipelineStep[];
+}
+
+export interface LogEntry {
+  id: number;
+  timestamp: string;
+  stream: 'system' | 'stdout' | 'stderr';
+  level: 'info' | 'error' | 'warning';
+  message: string;
+}
+
+export interface ProcessState {
+  projectId: string;
+  status: 'idle' | 'running' | 'completed' | 'failed' | 'cancelled' | 'detached';
+  step?: StepId;
+  label?: string;
+  pid?: number;
+  startedAt?: string;
+  endedAt?: string;
+  exitCode?: number | null;
+  progress?: number;
+  currentFrame?: number;
+  totalFrames?: number;
+  expectedDurationSeconds?: number;
+  error?: string;
+  logs: LogEntry[];
+}
+
+export interface QAResult {
+  overall: 'PASS' | 'FAIL';
+  checkedAt: string;
+  file: string;
+  checks: Array<{ id: string; label: string; pass: boolean; value: string }>;
+  metadata: {
+    width?: number;
+    height?: number;
+    fps?: number;
+    duration?: number;
+    codec?: string;
+    frames?: number;
+    hasAudio: boolean;
+    size?: number;
+  };
+  decode?: { pass: boolean; message: string };
+}
